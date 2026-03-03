@@ -164,8 +164,8 @@ CLOCK_COLOR=#FF0055
 # Activa el clima: 0=OFF, 1=ON (Requiere CLOCK_ENABLE=1)
 WEATHER_ENABLE=1
 
-# Tu ciudad (Sin espacios, usa '+' si es necesario: Madrid,ES o Buenos+Aires,AR)
-CITY=Madrid,ES
+# Tu ciudad (Sin espacios, usa '+' si es necesario: Azuagad,ES o Navalmoral+de+la+Mata,ES)
+CITY=Azuaga,ES
 
 # Tu API Key gratuita de OpenWeatherMap
 API_KEY=xxxxxxxxxxxxxxxxxxxxxxx
@@ -191,6 +191,18 @@ Para que la barra de notificaciones muestre la temperatura y el icono del tiempo
 4. **IMPORTANTE:** La Key puede tardar entre **30 minutos y 2 horas** en activarse desde que se crea. Si el panel muestra "0.0C", simplemente espera un poco.
 5. Copia esa clave en el apartado `API_KEY=` de tu archivo `config.ini`.
 
+### 🔍 ¿Cómo comprobar si el código de ciudad es correcto?
+
+Si quieres estar 100% seguro de que **OpenWeatherMap** reconoce tu ciudad antes de guardar el archivo en la Micro SD, puedes realizar esta prueba rápida en tu navegador:
+
+1. Copia la siguiente dirección en la barra de tu navegador.
+2. Sustituye las `Navalmoral de la Mata` por tu **Ciudad** real.
+3. Sustituye las `XXXXX` por tu **API Key** real.
+
+`http://api.openweathermap.org/data/2.5/weather?q=Navalmoral de la Mata,ES&appid=XXXXX`
+
+* **Si el resultado es un texto con datos (JSON):** ¡El nombre es perfecto y el ESP32 lo leerá sin problemas!
+* **Si el resultado es un error (401 o 404):** Revisa que tu API Key esté activa (recuerda que tarda hasta 2 horas en activarse) o que el nombre de la ciudad no tenga errores tipográficos.
 ---
 
 ## 🧠 Características Core LITE
