@@ -1,4 +1,4 @@
-# ✨ Retro Pixel LED Lite v1.0.0
+# ✨ Retro Pixel LED Lite v1.1.0
 
 ### **[✈️ Unirse al Grupo de Telegram: Retro Pixel LED](https://t.me/RetroPixelLed)**
 
@@ -9,7 +9,7 @@
 Es la solución perfecta para marquesinas fijas, salones arcade o decoración retro donde solo quieres **encender y disfrutar**.
 
 > [!TIP]
-> **🚀 Filosofía Lite:** Menos es más. Al apagar el WiFi después de sincronizar la hora, el sistema elimina el lag, reduce el calor del chip y evita cuelgues por saturación de red, permitiendo reproducciones fluidas de colecciones masivas.
+> **🚀 Filosofía Lite:** Menos es más. Al apagar el WiFi después de sincronizar la hora y el tiempo, el sistema elimina el lag, reduce el calor del chip y evita cuelgues por saturación de red, permitiendo reproducciones fluidas de colecciones masivas.
 
 ---
 
@@ -18,12 +18,30 @@ Es la solución perfecta para marquesinas fijas, salones arcade o decoración re
 | Característica | Versión Lite | Versión Estándar |
 | :--- | :--- | :--- |
 | **Arranque** | Instantáneo (Lectura de `lista.txt`) | Lento (Indexado de carpetas SD) |
-| **Conectividad** | WiFi Sync & Sleep (Solo para hora) | Online Permanente (Web + MQTT) |
+| **Conectividad** | WiFi Sync & Sleep (Hora y Clima) | Online Permanente (Web + MQTT) |
 | **Configuración** | Archivo `config.ini` en la SD | Interfaz Web UI |
 | **Límite de GIFs** | Ilimitado (+10.000 sin problemas) | Ilimitado (vía Caché SD) |
 | **Estabilidad** | Máxima (Sistema aislado) | Alta (Depende del tráfico WiFi) |
-| **Reloj** | Intermitente automático | Manual y Automático |
+| **Reloj** | Dinámico con Clima y Mensaje | Manual y Automático |
 
+---
+## 🆕 Novedades de la Versión v1.1.0
+
+Esta actualización transforma la experiencia del Reloj Lite, acercándolo a las capacidades de la versión estándar pero manteniendo su filosofía de alto rendimiento.
+
+### 📊 Nueva Barra de Notificaciones
+Se ha implementado una franja superior inteligente que se activa automáticamente al habilitar el clima.
+* **Mensaje Personalizado:** Ahora puedes definir un texto fijo (ej: `Game Room`, `Pixel Art`, `Tu Nombre`) desde el archivo `config.ini` que aparecerá siempre en la parte superior izquierda.
+* **Posicionamiento Inteligente:** Cuando la barra está activa, el reloj ajusta su posición vertical automáticamente para evitar solapamientos.
+
+### 🌦️ Integración con OpenWeatherMap
+El sistema ahora es capaz de conectarse a Internet para obtener datos meteorológicos reales:
+* **Iconos Dinámicos:** Se han añadido 6 iconos optimizados (Sol, Nubes, Lluvia, Nieve, Tormenta y Niebla) que cambian según el estado del tiempo en tu ciudad.
+* **Temperatura en Tiempo Real:** Visualización de la temperatura actual en grados Celsius con actualización periódica programable.
+
+### ⚙️ Mejoras en el Motor de Configuración
+* **Nuevas etiquetas en `config.ini`:** Se han añadido parámetros específicos para gestionar la API Key, la ciudad, el mensaje personalizado y el intervalo de actualización sin necesidad de tocar el código.
+* **Gestión de Energía:** El WiFi ahora solo se "despierta" durante unos segundos para actualizar el clima y la hora, volviendo a dormir inmediatamente para mantener la fluidez total de los GIFs.
 ---
 
 ## 🛠️ Herramientas Exclusivas Lite
@@ -93,7 +111,7 @@ Modifica el archivo de texto llamado `config.ini` en la raíz de la SD para deja
 
 ```ini
 # ============================================================
-# 🕹️ RETRO PIXEL LED LITE v1.0.0 - ARCHIVO DE CONFIGURACIÓN
+# 🕹️ RETRO PIXEL LED LITE v1.1.0 - ARCHIVO DE CONFIGURACIÓN
 # ============================================================
 # Nota: No dejes espacios alrededor del símbolo '='.
 # Ejemplo correcto: BRIGHTNESS=40
@@ -112,14 +130,14 @@ BRIGHTNESS=40    # Brillo general (0 a 255)
 I2S_SPEED=2
 
 # Refresco Mínimo (Hz): 30 a 120
-REFRESH_MIN=60
+REFRESH_MIN=100
 
 # Anti-Ghosting (Latch Blanking): 1 a 4 (Sube si ves brillo fantasma)
 LATCH_BLANK=1
 
 [LOGIC]
 # Activa o desactiva el reloj: 0=OFF (No usa WiFi), 1=ON
-CLOCK_ENABLE=0
+CLOCK_ENABLE=1
 
 # Modo de reproducción: 0=Secuencial (Sigue lista.txt), 1=Aleatorio
 RANDOM_MODE=1
@@ -142,8 +160,48 @@ CLOCK_STYLE=2
 # Usado en estilos Solid, Pulse y Gradient.
 CLOCK_COLOR=#FF0055
 
+[WEATHER]
+# Activa el clima: 0=OFF, 1=ON (Requiere CLOCK_ENABLE=1)
+WEATHER_ENABLE=1
+
+# Tu ciudad (Sin espacios, usa '+' si es necesario: Madrid,ES o Buenos+Aires,AR)
+CITY=Madrid,ES
+
+# Tu API Key gratuita de OpenWeatherMap
+API_KEY=xxxxxxxxxxxxxxxxxxxxxxx
+
+# Intervalo de actualización en MINUTOS (Recomendado: 60)
+# El ESP32 encenderá el WiFi brevemente solo para esto.
+WEATHER_INT=60
+
+# Texto que se muestra encima del reloj a modo de notificación 
+# |Game Room ☀️21ºC|
+# |  14 : 20 : 56  |
+WEATHER_MSG=Game Room
+
 [END]
 ```
+## ☁️ Cómo obtener tu API KEY de Clima
+
+Para que la barra de notificaciones muestre la temperatura y el icono del tiempo, necesitas una llave gratuita de **OpenWeatherMap**:
+
+1. Ve a [OpenWeatherMap.org](https://openweathermap.org/) y crea una cuenta gratuita.
+2. Una vez logueado, ve a tu perfil y haz clic en **"My API Keys"**.
+3. Genera una nueva Key (puedes llamarla "RetroPixel").
+4. **IMPORTANTE:** La Key puede tardar entre **30 minutos y 2 horas** en activarse desde que se crea. Si el panel muestra "0.0C", simplemente espera un poco.
+5. Copia esa clave en el apartado `API_KEY=` de tu archivo `config.ini`.
+
+---
+
+## 🧠 Características Core LITE
+
+* **WiFi Stealth Mode:** El ESP32 solo activa el WiFi brevemente para sincronizar la hora y el clima. El resto del tiempo el sistema permanece **100% offline**, garantizando **0 lag** en la reproducción de los GIFs.
+* **Barra de Notificaciones Dinámica:** Si activas el clima, el reloj baja automáticamente su posición (`startY=9`) para mostrar el mensaje personalizado (`WEATHER_MSG`), el icono del tiempo y la temperatura.
+* **Iconos en Bitmap:** Incluye iconos optimizados de 8x8 píxeles dibujados a mano para representar: Sol, Nubes, Lluvia, Nieve, Tormenta y Niebla.
+* **Motor de Lista Plana:** Lectura instantánea del archivo `lista.txt` para soportar colecciones de miles de GIFs sin tiempos de carga.
+* **Reloj Auto-Interrupción:** El panel interrumpe la galería cada "x" GIFs para mostrar la hora durante "x" segundos (ambos configurables en config.ini), retomando la reproducción exactamente donde se quedó.
+* **Resiliencia Offline:** Si no hay WiFi disponible, el sistema ignora la sincronización y comienza a reproducir GIFs inmediatamente usando el reloj interno del chip.
+
 ## 🛒 Lista de Materiales
 
 Para garantizar la compatibilidad, se recomienda el uso de los componentes probados durante el desarrollo:
@@ -187,15 +245,6 @@ Si utilizas DMDos Board V3 esta parte ya la tienes, salta al siguiente punto.
 | **CLK** | GPIO 16 | Clock |
 | **LAT** | GPIO 4 | Latch |
 | **OE** | GPIO 15 | Output Enable (Brillo) |
----
-
-## 🧠 Características Core LITE
-
-* **WiFi Stealth Mode:** Al arrancar, el ESP32 se conecta al WiFi durante 5 segundos para obtener la hora (NTP). Una vez sincronizado, **apaga el WiFi por completo** para eliminar interferencias y calor.
-* **Motor de Lista Plana:** En lugar de navegar por directorios complejos, lee directamente desde `lista.txt`. Esto permite saltos de archivo en milisegundos sin latencia.
-* **Reloj Auto-Interrupción:** El panel interrumpe la galería cada "X" GIFs para mostrar la hora durante 10 segundos, retomando la reproducción exactamente donde se quedó.
-* **Resiliencia Offline:** Si no hay WiFi disponible, el sistema ignora la sincronización y comienza a reproducir GIFs inmediatamente usando el reloj interno del chip.
-
 ---
 
 ## 🛠️ Hoja de Ruta (Roadmap LITE)
