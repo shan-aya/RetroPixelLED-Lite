@@ -1,4 +1,4 @@
-# ✨ Retro Pixel LED Lite v1.1.0
+# ✨ Retro Pixel LED Lite v1.1.2
 
 ### **[✈️ Unirse al Grupo de Telegram: Retro Pixel LED](https://t.me/RetroPixelLed)**
 
@@ -25,23 +25,25 @@ Es la solución perfecta para marquesinas fijas, salones arcade o decoración re
 | **Reloj** | Dinámico con Clima y Mensaje | Manual y Automático |
 
 ---
-## 🆕 Novedades de la Versión v1.1.0
+## 🆕 Novedades de la Versión v1.1.2 Lite
 
-Esta actualización transforma la experiencia del Reloj Lite, acercándolo a las capacidades de la versión estándar pero manteniendo su filosofía de alto rendimiento.
+Esta actualización marca un hito en la estabilidad visual del sistema **Retro Pixel LED**, introduciendo tecnologías de renderizado que eliminan por completo el parpadeo y mejoran la experiencia de usuario desde el primer segundo.
 
-### 📊 Nueva Barra de Notificaciones
-Se ha implementado una franja superior inteligente que se activa automáticamente al habilitar el clima.
-* **Mensaje Personalizado:** Ahora puedes definir un texto fijo (ej: `Game Room`, `Pixel Art`, `Tu Nombre`) desde el archivo `config.ini` que aparecerá siempre en la parte superior izquierda.
-* **Posicionamiento Inteligente:** Cuando la barra está activa, el reloj ajusta su posición vertical automáticamente para evitar solapamientos.
+### 🚀 Motor de Renderizado: Double Buffering
+Se ha implementado la técnica de **Double Buffering** (Doble Buffer de Memoria) para una reproducción de contenido ultra fluida.
+* **Adiós al Parpadeo:** Al dibujar los frames en una "pizarra oculta" antes de volcarlos a los LEDs, se eliminan las interferencias visuales durante las transiciones.
+* **Scroll Suave:** Las animaciones con desplazamientos laterales y verticales en los GIFs ahora son mucho más nítidas, eliminando el efecto de "salto" de frames.
+* **Sincronización Vertical:** Optimización de la tasa de refresco a **120Hz** para coincidir con los múltiplos de frames por segundo habituales en el Pixel Art.
 
-### 🌦️ Integración con OpenWeatherMap
-El sistema ahora es capaz de conectarse a Internet para obtener datos meteorológicos reales:
-* **Iconos Dinámicos:** Se han añadido 6 iconos optimizados (Sol, Nubes, Lluvia, Nieve, Tormenta y Niebla) que cambian según el estado del tiempo en tu ciudad.
-* **Temperatura en Tiempo Real:** Visualización de la temperatura actual en grados Celsius con actualización periódica programable.
+### 🖼️ Nuevo Splash Screen y Branding
+El proceso de arranque ha sido rediseñado para ofrecer una estética más limpia, técnica y profesional.
+* **Logo RGB Dinámico:** Inicio con el logotipo "RETRO PIXEL LED lite" utilizando colores independientes para las siglas LED y marcos de contorno estilizados.
+* **Identificación de Firmware:** Visualización directa de la versión del sistema (`v1.1.2`) en la pantalla de carga, facilitando el control de versiones y soporte.
 
-### ⚙️ Mejoras en el Motor de Configuración
-* **Nuevas etiquetas en `config.ini`:** Se han añadido parámetros específicos para gestionar la API Key, la ciudad, el mensaje personalizado y el intervalo de actualización sin necesidad de tocar el código.
-* **Gestión de Energía:** El WiFi ahora solo se "despierta" durante unos segundos para actualizar el clima y la hora, volviendo a dormir inmediatamente para mantener la fluidez total de los GIFs.
+### ⚡ Gestión Avanzada de Memoria "Silent WiFi"
+Para permitir el uso del Double Buffer en el ESP32 (que duplica el consumo de RAM DMA), se ha rediseñado el flujo de arranque:
+* **Secuencialidad Crítica:** El sistema ahora gestiona la conexión WiFi, sincronización NTP y descarga del clima *antes* de inicializar el panel LED. 
+* **Liberación de Recursos:** Una vez obtenidos los datos, el driver de WiFi se apaga por completo para ceder toda la memoria RAM al motor gráfico, evitando el error de inicialización `0x3001`.
 ---
 
 ## 🛠️ Herramientas Exclusivas Lite
@@ -111,7 +113,7 @@ Modifica el archivo de texto llamado `config.ini` en la raíz de la SD para deja
 
 ```ini
 # ============================================================
-# 🕹️ RETRO PIXEL LED LITE v1.1.0 - ARCHIVO DE CONFIGURACIÓN
+# 🕹️ RETRO PIXEL LED LITE v1.1.2 - ARCHIVO DE CONFIGURACIÓN
 # ============================================================
 # Nota: No dejes espacios alrededor del símbolo '='.
 # Ejemplo correcto: BRIGHTNESS=40
@@ -129,8 +131,8 @@ BRIGHTNESS=40    # Brillo general (0 a 255)
 # Velocidad I2S: 0=8MHz, 1=10MHz, 2=16MHz, 3=20MHz (Turbo)
 I2S_SPEED=2
 
-# Refresco Mínimo (Hz): 30 a 120
-REFRESH_MIN=100
+# Refresco Mínimo (Hz): 30 a 140
+REFRESH_MIN=120
 
 # Anti-Ghosting (Latch Blanking): 1 a 4 (Sube si ves brillo fantasma)
 LATCH_BLANK=1
