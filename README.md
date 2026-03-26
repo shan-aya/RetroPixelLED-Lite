@@ -29,6 +29,48 @@ Si quieres probar la versión estandar aquí tienes el enlace al **[GitHub.](htt
 | **💾 SD Persistence** | Guardado de ajustes en `config.ini` tras cada cambio en el OSD. | **Memoria Persistente.** El panel recuerda tu brillo, modo de red y playlist elegida tras apagarlo. |
 ---
 
+### 🖥️ Estructura del Menú OSD (Navegación)
+
+El sistema se controla mediante un **único botón**. La navegación es intuitiva:
+* **Pulsación Corta (0.5 a 1 seg):** Acceder al menú OSD o moverse por las opciones (Bajar).
+* **Pulsación Larga (1.5 a 3 seg):** Entrar en un submenú o confirmar una selección.
+* **Pulsación super Larga (+10 seg):** Reset.
+
+```text
+🏠 MENÚ PRINCIPAL
+├── 📂 Playlists
+│   ├── 📄 Favoritos
+│   ├── 📄 Arcade
+│   ├── 📄 ...
+│   └── 🔙 Volver
+├── 📂 Reproducción
+│   └── 🔀 Aleatorio: [SI / NO]
+│   └── 🔙 Volver
+├── ☀️ Brillo
+│   └──   Brillo: [5% - 100%]
+├── 📶 WiFi: [ON / OFF]
+│   ├── 🔄 Activar: [SI / NO]
+│   └── 🔙 Volver
+├── 🕒 Reloj: [ON / OFF]
+│   ├── 🔄 Activar: [SI / NO]
+│   ├── 🖼️ Cada: [1...20] GIFs
+│   ├── ⏳ Ver: [5...30] seg
+│   └── 🎨 Estilo Reloj: [Matrix, Solid, Rainbow, Pulse, Gradient]
+│   └── 🔙 Volver
+├── 🌡️ Clima: [ON / OFF]
+│   └── 🔄 Activar: [SI / NO]
+│   └── 🔙 Volver
+├── ⚙️ Ajustes Avanzados
+│   ├── ⚡ I2sSeep: [8, 10, 16, 20MHz]
+│   ├── 🔄 Refresco: [30, 60, 90, 120Hz]
+│   ├── 🖼️ Buffer: [SI / NO]
+│   ├── 👻 AntiGhot: [1, 2, 3, 4]
+│   ├── ⚠️ Reset:
+│   └── 🔙 Volver
+├── 💾 Guardar
+└── 🔙 Salir
+```
+
 ## 🛠️ Herramientas Exclusivas Lite
 
 ### 📖 Cómo usar el Script Generador de Playlists (Windows)
@@ -108,7 +150,7 @@ BRIGHTNESS=40    # Brillo general (0 a 255)
 # Velocidad I2S: 0=8MHz, 1=10MHz, 2=16MHz, 3=20MHz (Turbo)
 I2S_SPEED=2
 
-# Refresco Mínimo (Hz): 30 a 1240
+# Refresco Mínimo (Hz): 30 a 120
 REFRESH_MIN=120
 
 # Doble Buffer Activa o desactiva esta función: 0=OFF, 1=ON (Elimina parpadeos)
@@ -163,49 +205,8 @@ WEATHER_MSG=Game Room
 
 [END]
 ```
-### 4. 🖥️ Estructura del Menú OSD (Navegación)
 
-El sistema se controla mediante un **único botón**. La navegación es intuitiva:
-* **Pulsación Corta (0.5 a 1 seg):** Acceder al menú OSD o moverse por las opciones (Bajar).
-* **Pulsación Larga (1.5 a 3 seg):** Entrar en un submenú o confirmar una selección.
-* **Pulsación super Larga (+10 seg):** Reset.
-
-```text
-🏠 MENÚ PRINCIPAL
-├── 📂 Playlists
-│   ├── 📄 Favoritos
-│   ├── 📄 Arcade
-│   ├── 📄 ...
-│   └── 🔙 Volver
-├── 📂 Reproducción
-│   └── 🔀 Aleatorio: [SI / NO]
-│   └── 🔙 Volver
-├── ☀️ Brillo
-│   └──   Brillo: [5% - 100%]
-├── 📶 WiFi: [ON / OFF]
-│   ├── 🔄 Activar: [SI / NO]
-│   └── 🔙 Volver
-├── 🕒 Reloj: [ON / OFF]
-│   ├── 🔄 Activar: [SI / NO]
-│   ├── 🖼️ Cada: [1...20] GIFs
-│   ├── ⏳ Ver: [5...30] seg
-│   └── 🎨 Estilo Reloj: [Matrix, Solid, Rainbow, Pulse, Gradient]
-│   └── 🔙 Volver
-├── 🌡️ Clima: [ON / OFF]
-│   └── 🔄 Activar: [SI / NO]
-│   └── 🔙 Volver
-├── ⚙️ Ajustes Avanzados
-│   ├── ⚡ I2sSeep: [8, 10, 16, 20MHz]
-│   ├── 🔄 Refresco: [30, 60, 90, 120Hz]
-│   ├── 🖼️ Buffer: [SI / NO]
-│   ├── 👻 AntiGhot: [1, 2, 3, 4]
-│   ├── ⚠️ Reset:
-│   └── 🔙 Volver
-├── 💾 Guardar
-└── 🔙 Salir
-```
-
-## ☁️ Cómo obtener tu API KEY de Clima
+### 4. ☁️ Cómo obtener tu API KEY de Clima
 
 Para que la barra de notificaciones muestre la temperatura y el icono del tiempo, necesitas una llave gratuita de **OpenWeatherMap**:
 
