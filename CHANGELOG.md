@@ -1,5 +1,20 @@
 ## 📝 Changelog (Registro de Cambios)
 
+### [v2.0.0] - 2026-03-26
+**Retro Pixel LED Lite: "OSD Menu, Night Mode & Smart RAM"**
+
+#### ✨ Añadido
+- **Menú OSD (On-Screen Display):** Interfaz nativa en el panel LED para configurar Playlists, Brillo, WiFi y Reloj con un solo botón físico.
+- **Modo Noche Dinámico:** Integración con iconos de Luna y paletas de colores fríos automáticas basadas en la hora local y datos de OpenWeatherMap.
+- **Plug & Play Automático:** El sistema ahora escanea y reproduce la primera playlist encontrada en `/playlists` si no hay ninguna seleccionada.
+- **Persistencia en SD:** Guardado automático de todos los ajustes realizados desde el menú OSD directamente en el archivo `config.ini`.
+
+#### ⚙️ Mejoras
+- **Smart RAM Refresh:** Lógica de reinicio inteligente al actualizar clima/hora para evitar la fragmentación de memoria causada por el Double Buffer.
+- **Gestión WiFi Stealth:** Desactivación radical del stack de red tras la sincronización para eliminar el lag y reducir la temperatura del ESP32.
+- **Sincronización NTP Silenciosa:** Ajuste del reloj interno en cada ventana de actualización de clima para evitar desviaciones horarias.
+- **Optimización de Playlists:** Transiciones instantáneas entre listas temáticas desde el menú sin necesidad de reiniciar el dispositivo.
+---
 ### [v1.1.2] - 2026-03-19
 **Retro Pixel LED Lite: "Double Buffering & Splash Screen y Branding"**
 
