@@ -15,6 +15,8 @@ Si quieres probar la versión estandar aquí tienes el enlace al **[GitHub.](htt
 > [!TIP]
 > **🚀 Filosofía Lite:** Menos es más. Al apagar el WiFi después de sincronizar la hora y el tiempo, el sistema elimina el lag, reduce el calor del chip y evita cuelgues por saturación de red, permitiendo reproducciones fluidas de colecciones masivas.
 
+Si quieres probar la versión estandar aquí tienes el enlace al **[GitHub.](https://github.com/fjgordillo86/RetroPixelLED)**
+
 ---
 ## 🆕 Novedades de la Versión v2.0.0 Lite
 
