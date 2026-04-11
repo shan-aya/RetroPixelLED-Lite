@@ -1,4 +1,4 @@
-# ✨ Retro Pixel LED Lite v2.0.0
+# ✨ Retro Pixel LED Lite v2.0.5
 
 ### **[✈️ Unirse al Grupo de Telegram: Retro Pixel LED para estár al día de las actualizaciones](https://t.me/RetroPixelLed)**
 
@@ -6,7 +6,7 @@
 
 **Retro Pixel LED Lite** es la versión de alto rendimiento diseñada para quienes buscan estabilidad absoluta, velocidad instantánea y un sistema libre de mantenimiento. A diferencia de la versión estándar, el firmware LITE elimina la carga del servidor web y la conectividad permanente para dedicar el 100% de la potencia del ESP32 al renderizado de GIFs. 
 
-La versión **2.0.0** supone una revolución con la integración de un Menú OSD (On-Screen Display) nativo, que permite al usuario navegar por las listas de reproducción, ajustar el brillo, configurar el reloj y gestionar la conectividad WiFi.... directamente desde el panel LED, sin necesidad de dispositivos externos.
+La versión **2.x.x** supone una revolución con la integración de un Menú OSD (On-Screen Display) nativo, que permite al usuario navegar por las listas de reproducción, ajustar el brillo, configurar el reloj y gestionar la conectividad WiFi.... directamente desde el panel LED, sin necesidad de dispositivos externos.
 
 Es la solución perfecta para marquesinas fijas, salones arcade o decoración retro donde solo quieres **encender y disfrutar**.
 
@@ -16,25 +16,44 @@ Es la solución perfecta para marquesinas fijas, salones arcade o decoración re
 Si quieres probar la versión estandar aquí tienes el enlace al **[GitHub.](https://github.com/fjgordillo86/RetroPixelLED)**
 
 ---
-## 🆕 Novedades de la Versión v2.0.0 Lite
+## 🆕 Novedades de la Versión v2.0.5 Lite
 
 | Característica | Detalle Técnico | Beneficio |
 | :--- | :--- | :--- |
-| **🖥️ Native OSD Menu** | Interfaz visual renderizada directamente en el panel LED. | **Control Total.** Ajusta brillo, WiFi y Playlists con un solo botón sin usar el PC. |
-| **🖼️ Double Buffering** | Implementación de doble buffer de memoria en el stack DMA. | **Cero Parpadeo.** Eliminación total del flickering y scrolls laterales ultra fluidos a 120Hz. |
-| **🌙 Dynamic Night Mode** | Integración astronómica con OpenWeatherMap (campo `icon`). | **Estética Realista.** El panel muestra iconos de Luna y tonos fríos automáticamente al anochecer. |
-| **🧠 Smart RAM Refresh** | Lógica de Soft-Reset tras actualizaciones de clima/hora. | **Estabilidad 24/7.** Evita la fragmentación de memoria al usar Double Buffer, garantizando 0 cuelgues. |
-| **🔌 Auto-Playlist P&P** | Escaneo automático de la carpeta `/playlists` al arranque. | **Plug & Play.** El panel funciona de forma autónoma desde el primer segundo, incluso sin botón de menú. |
-| **📶 WiFi Stealth Mode** | Gestión radical del stack WiFi (Active/Sleep selectivo). | **Cero Lag.** El radio se apaga tras sincronizar, dedicando el 100% del CPU al renderizado de GIFs. |
-| **💾 SD Persistence** | Guardado de ajustes en `config.ini` tras cada cambio en el OSD. | **Memoria Persistente.** El panel recuerda tu brillo, modo de red y playlist elegida tras apagarlo. |
+| **🔄 Modo Visual Dual** | Selector de modo de trabajo entre "Solo Reloj" y "GIF Playlist". | **Versatilidad.** Elige si prefieres una galería de arte animada o un reloj minimalista permanente. |
+| **⏰ Smart Timer On/Off** | Lógica con soporte para cruce de medianoche (Over-midnight). | **Automatización.** Configura el panel para que esté encendido en el horario establecido. |
+| **🕹️ Manual Override** | Sistema de prioridad de usuario con bloqueo de temporizador. | **Respeto al usuario.** Si apagas o enciendes a mano, el panel no te restaura el estado hasta el siguiente ciclo. |
+| **⚡ I2S Safety Shield** | Limitador dinámico de frecuencia I2S (16MHz/20MHz) según Buffer. | **Protección de HW.** Evita reinicios infinitos por falta de memoria al usar Double Buffer. |
 ---
+## 📜 Historial de Cambios Detallado (v2.0.0 -> v2.0.5)
 
-### 🖥️ Estructura del Menú OSD (Navegación)
+| Tipo | Componente | Descripción del Cambio |
+| :--- | :--- | :--- |
+| **✨ Nuevo** | **Visual** | Implementado selector de modo: "GIF Playlist" vs "Solo Reloj". |
+| **✨ Nuevo** | **Energía** | Temporizador On/Off con soporte para horario nocturno (ej. 23:00 a 07:00). |
+| **✨ Nuevo** | **Energía** | Función "Manual Override" (4s) para forzar sueño/despertar ignorando el Timer. |
+| **⚡ Mejora** | **UX / Botón** | Ajuste de intervalo de reloj reducido a rango **[2-10]** con saltos de **+2**. |
+| **⚡ Mejora** | **UX / Botón** | Lógica de **+5 min** (mantener) y **-5 min** (pulsación larga) en el ajuste del Timer. |
+| **⚡ Mejora** | **UX / Botón** | Despertar instantáneo del modo sueño con una sola pulsación rápida. |
+| **⚡ Mejora** | **Rendimiento** | Eliminado código bloqueante en Reloj y GIFs; respuesta al botón 100% instantánea. |
+| **⚡ Mejora** | **OSD** | Menús paginados (Página 1/2) para mejorar la legibilidad y organización. |
+| **🛡️ Fix** | **Estabilidad** | Limitación de I2S a 16MHz al detectar Double Buffer activo para prevenir crashes. |
+| **🛡️ Fix** | **Clima (API)** | **Sanitización de URL:** Corrección en el manejo de nombres de ciudades con espacios o guiones, evitando fallos en la petición HTTP. |
+| **🧹 Limpieza** | **SD** | Opción Reset en menú avanzado para borrar `PlaytList` seleccionada y `Temporizador`. |
 
-El sistema se controla mediante un **único botón**. La navegación es intuitiva:
-* **Pulsación Corta (0.5 a 1 seg):** Acceder al menú OSD o moverse por las opciones (Bajar).
-* **Pulsación Larga (1.5 a 3 seg):** Entrar en un submenú o confirmar una selección.
-* **Pulsación super Larga (+10 seg):** Reset.
+### 🖥️ Estructura del Menú OSD (Navegación Inteligente)
+
+El sistema se controla mediante un **único botón**. Utiliza una lógica de pulsación avanzada que se adapta según el menú donde te encuentres:
+* **Pulsación Rápida (>0.5 seg):**
+    * **En Menús:** Mover el cursor / Navegar hacia abajo.
+    * **En Modo Sueño:** Despierta el panel de forma inmediata (Wake-up).
+* **Pulsación Larga (1 a 2 seg):**
+    * **Acción General:** Entrar en submenús o confirmar selección.
+    * **En Configuración de Tiempo (Temporizador):** Resta **-5 minutos** al valor actual para un ajuste rápido hacia atrás.
+* **Pulsación Extra Larga (> 4 seg):**
+    * **Manual Override:** Fuerza el apagado (Modo Sueño), bloqueando el automatismo del temporizador hasta el próximo ciclo.
+* **Mantener Pulsación Continua:**
+    * **En Configuración de Tiempo (Temporizador):** Incrementa automáticamente **+5 minutos** de forma cíclica mientras mantengas pulsado.
 
 ```text
 🏠 MENÚ PRINCIPAL
@@ -44,6 +63,7 @@ El sistema se controla mediante un **único botón**. La navegación es intuitiv
 │   ├── 📄 ...
 │   └── 🔙 Volver
 ├── 📂 Reproducción
+│   └── 🖼️ Modo: [GIFs / Reloj]
 │   └── 🔀 Aleatorio: [SI / NO]
 │   └── 🔙 Volver
 ├── ☀️ Brillo
@@ -60,6 +80,11 @@ El sistema se controla mediante un **único botón**. La navegación es intuitiv
 ├── 🌡️ Clima: [ON / OFF]
 │   └── 🔄 Activar: [SI / NO]
 │   └── 🔙 Volver
+├── 🕒 Temporizador: [ON / OFF]
+│   ├── 🔄 Activar: [SI / NO]
+│   ├── ⏳ ON: [00:00 a 24:00]
+│   ├── ⏳ OFF: [00:00 a 24:00]
+│   └── 🔙 Volver
 ├── ⚙️ Ajustes Avanzados
 │   ├── ⚡ I2sSeep: [8, 10, 16, 20MHz]
 │   ├── 🔄 Refresco: [30, 60, 90, 120Hz]
@@ -70,7 +95,14 @@ El sistema se controla mediante un **único botón**. La navegación es intuitiv
 ├── 💾 Guardar
 └── 🔙 Salir
 ```
+### ⏰ Funcionamiento del Submenú Temporizador
 
+Para facilitar la configuración de las horas de encendido (`hon/mon`) y apagado (`hoff/moff`), se ha implementado una lógica de saltos de 5 minutos:
+
+1.  **¿Quieres avanzar rápido?** Mantén pulsado el botón. El tiempo subirá de 5 en 5 minutos sin que tengas que soltar.
+2.  **¿Te has pasado de hora?** Realiza una pulsación larga (un segundo) y el tiempo retrocederá 5 minutos.
+
+   
 ## 🛠️ Herramientas Exclusivas Lite
 
 ### 📖 Cómo usar el Script Generador de Playlists (Windows)
@@ -132,81 +164,83 @@ Modifica el archivo de texto llamado `config.ini` en la raíz de la SD para deja
 
 ```ini
 # ============================================================
-# 🕹️ RETRO PIXEL LED LITE v2.0.0 - ARCHIVO DE CONFIGURACIÓN
+# 🕹️ RETRO PIXEL LED LITE v2.0.5 - ARCHIVO DE CONFIGURACIÓN
 # ============================================================
 # Nota: No dejes espacios alrededor del símbolo '='.
 # Ejemplo correcto: BRIGHTNESS=40
 
 [WIFI_NTP]
 # Configura tu red solo si vas a usar el reloj (CLOCK_ENABLE=1)
+WIFI_ENABLE=1
 SSID=Nombre_De_Tu_Red
 PASS=Password_De_Tu_Red
 TZ=CET-1CEST,M3.5.0,M10.5.0/3
 
 [HARDWARE]
-PANEL_CHAIN=2     # Número de paneles en cascada
-BRIGHTNESS=40    # Brillo general (0 a 255)
-
+# Número de paneles en cascada
+PANEL_CHAIN=2
+# # Brillo general (0 a 255)
+BRIGHTNESS=40
 # Velocidad I2S: 0=8MHz, 1=10MHz, 2=16MHz, 3=20MHz (Turbo)
 I2S_SPEED=2
-
 # Refresco Mínimo (Hz): 30 a 120
 REFRESH_MIN=120
-
 # Doble Buffer Activa o desactiva esta función: 0=OFF, 1=ON (Elimina parpadeos)
 DOUBLE_BUFF=1
-
 # Anti-Ghosting (Latch Blanking): 1 a 4 (Sube si ves brillo fantasma)
 LATCH_BLANK=1
 
 [LOGIC]
-# Activa o desactiva el reloj: 0=OFF (No usa WiFi), 1=ON
+# Modo de visualizacion: 0=GIFs, 1=Solo Reloj
+PLAY_MODE=0
+# Activa o desactiva el reloj: 0=OFF, 1=ON
 CLOCK_ENABLE=1
-
-# Modo de reproducción: 0=Secuencial (Sigue lista.txt), 1=Aleatorio
+# Modo de reproducción: 0=Secuencial, 1=Aleatorio
 RANDOM_MODE=1
-
-# Intervalo: Cada cuántos GIFs aparece el reloj (ej: 5)
-AUTO_CLOCK_INT=5
-
+# Intervalo: Cada cuántos GIFs aparece el reloj
+AUTO_CLOCK_INT=6
 # Duración: Cuántos segundos se muestra el reloj
 CLOCK_DURATION=10
-
-# Estilos de Reloj:
-# 0: Matrix (Verde clásico)
-# 1: Solid (Azul sólido)
-# 2: Rainbow (Colores cambiantes)
-# 3: Pulse (Efecto respiración)
-# 4: Gradient (Degradado premium)
+# Estilos de Reloj: 0=Matrix, 1=Solid, 2=Rainbow, 3=Pulse, 4=Gradient
 CLOCK_STYLE=2
-
 # Color del Reloj (Formato HEX)
-# Usado en estilos Solid, Pulse y Gradient.
 CLOCK_COLOR=#FF0055
 
 [WEATHER]
 # Activa el clima: 0=OFF, 1=ON (Requiere CLOCK_ENABLE=1)
 WEATHER_ENABLE=1
-
-# Tu ciudad (Sin espacios, usa '+' si es necesario: Azuaga,ES o Navalmoral+de+la+Mata,ES)
-CITY=Azuaga,ES
-
+# Tu ciudad (Sin espacios, usa '+' si es necesario: Madrid,ES o Buenos+Aires,AR)
+CITY=Navalmoral+de+la+Mata,ES
 # Tu API Key gratuita de OpenWeatherMap
 API_KEY=xxxxxxxxxxxxxxxxxxxxxxx
-
-# Intervalo de actualización en MINUTOS (Recomendado: 60)
-# El ESP32 encenderá el WiFi brevemente solo para esto.
+# Intervalo de actualización en MINUTOS
 WEATHER_INT=60
-
-# Texto que se muestra encima del reloj a modo de notificación 
-# |Game Room ☀️21ºC|
-# |  14 : 20 : 56  |
+# Texto que se muestra encima del reloj
 WEATHER_MSG=Game Room
 
 [END]
 ```
+---
 
-### 4. ☁️ Cómo obtener tu API KEY de Clima
+### 4. 🌍 Configuración de Zona Horaria (TZ)
+
+Para que el **Reloj** y el **Temporizador** funcionen correctamente, el parámetro `timezone` en el archivo `config.ini` debe seguir el formato POSIX. 
+
+Ejemplo para **España (Península y Baleares) / Francia / Italia**:
+`timezone=CET-1CEST,M3.5.0,M10.5.0/3`
+Ejemplo para **Canarias / Portugal / Reino Unido**:
+`timezone=WET0WEST,M3.5.0/1,M10.5.0`
+
+### ¿Cómo obtener tu código TZ?
+Si vives en otra región, puedes obtener el código exacto de tu ciudad aquí:
+👉 **[ESP32 TZ Tool / Database](https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv)**
+
+### Explicación del formato:
+* **CET-1CEST**: Nombre de la zona (Central European Time) y desfase base (UTC+1).
+* **M3.5.0**: Cambio de horario de verano (Marzo, semana 5, Domingo).
+* **M10.5.0/3**: Cambio de horario de invierno (Octubre, semana 5, Domingo a las 03:00).
+  
+### 5. ☁️ Cómo obtener tu API KEY de Clima
 
 Para que la barra de notificaciones muestre la temperatura y el icono del tiempo, necesitas una llave gratuita de **OpenWeatherMap**:
 
@@ -297,10 +331,14 @@ Si utilizas DMDos Board V3 esta parte ya la tienes, salta al siguiente punto.
 
 ## 🛠️ Hoja de Ruta (Roadmap LITE)
 
-### ⚡ Optimización
+### ⚡ Optimización & Funcionalidad
+* **[Próximamente] Sistema de Idiomas Dinámico:** Implementación de diccionarios externos (`es.txt`, `en.txt`, `fr.txt`) en la SD para cambiar todos los textos del OSD sin tocar el código.
+* **[Próximamente] Integración con Batocera / RetroPie:** Soporte para scripts `game-start` que enviarán el nombre del juego al panel para mostrar el GIF correspondiente automáticamente al jugar.
+* **[Investigación] Búsqueda Binaria:** Optimización de la función `buscarEnCache` para gestionar colecciones de miles de GIFs sin latencia.
 
-### 🎨 Estética
-
+### 🎨 Estética & Conectividad
+* **[Próximamente] Soporte MQTT (Home Assistant):** Integración total para controlar el brillo, encendido/apagado y cambio de Playlists desde tu panel de domótica.
+* **[Diseño] Autocentrado Dinámico:** Lógica de renderizado para centrar automáticamente cualquier texto del diccionario en el panel basándose en el ancho de píxeles.
 ---
 
 ## ⚖️ Licencia y Agradecimientos
