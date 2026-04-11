@@ -41,6 +41,7 @@ Si quieres probar la versión estandar aquí tienes el enlace al **[GitHub.](htt
 | **🛡️ Fix** | **Clima (API)** | **Sanitización de URL:** Corrección en el manejo de nombres de ciudades con espacios o guiones, evitando fallos en la petición HTTP. |
 | **🧹 Limpieza** | **SD** | Opción Reset en menú avanzado para borrar `PlaytList` seleccionada y `Temporizador`. |
 
+---
 ### 🖥️ Estructura del Menú OSD (Navegación Inteligente)
 
 El sistema se controla mediante un **único botón**. Utiliza una lógica de pulsación avanzada que se adapta según el menú donde te encuentres:
