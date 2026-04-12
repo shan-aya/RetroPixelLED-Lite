@@ -338,6 +338,7 @@ Si utilizas DMDos Board V3 esta parte ya la tienes, salta al siguiente punto.
 * **[Investigación] Búsqueda Binaria:** Optimización de la función `buscarEnCache` para gestionar colecciones de miles de GIFs sin latencia.
 
 ### 🎨 Estética & Conectividad
+* **[Próximamente] OTA Self-Update:** Botón dedicado en el menú OSD para buscar, descargar e instalar actualizaciones automáticamente desde GitHub sin usar cables.
 * **[Próximamente] Soporte MQTT (Home Assistant):** Integración total para controlar el brillo, encendido/apagado y cambio de Playlists desde tu panel de domótica.
 * **[Diseño] Autocentrado Dinámico:** Lógica de renderizado para centrar automáticamente cualquier texto del diccionario en el panel basándose en el ancho de píxeles.
 ---
