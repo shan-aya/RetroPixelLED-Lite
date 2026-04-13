@@ -175,6 +175,7 @@ Si vous ajoutez, supprimez ou déplacez des GIFs dans le dossier /gifs/, assurez
 ### 3. 📝 Configuration via config.ini
 Modifiez le fichier texte nommé config.ini à la racine de la SD pour configurer Retro Pixel LED Lite selon vos préférences :
 
+```ini
 # ============================================================
 # 🕹️ RETRO PIXEL LED LITE v2.0.5 - FICHIER DE CONFIGURATION
 # ============================================================
@@ -231,7 +232,7 @@ WEATHER_INT=60
 WEATHER_MSG=Game Room
 
 [END]
-
+```
 ---
 
 ### 4. 🌍 Configuration de Zone Horaire (TZ)
