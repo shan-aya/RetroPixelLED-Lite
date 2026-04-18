@@ -1,4 +1,4 @@
-# ✨ Retro Pixel LED Lite v2.0.5
+# ✨ Retro Pixel LED Lite v2.1.0
 **[🇪🇸 Español](https://github.com/fjgordillo86/RetroPixelLED-Lite/blob/main/README.md) | [🇫🇷 Français](https://github.com/fjgordillo86/RetroPixelLED-Lite/blob/main/README_FR.md)**
 
 ### **[✈️ Unirse al Grupo de Telegram: Retro Pixel LED para estár al día de las actualizaciones](https://t.me/RetroPixelLed)**
@@ -17,31 +17,25 @@ Es la solución perfecta para marquesinas fijas, salones arcade o decoración re
 Si quieres probar la versión estandar aquí tienes el enlace al **[GitHub.](https://github.com/fjgordillo86/RetroPixelLED)**
 
 ---
-## 🆕 Novedades de la Versión v2.0.5 Lite
+## 🆕 Novedades de la Versión v2.1.0 Lite
 
 | Característica | Detalle Técnico | Beneficio |
 | :--- | :--- | :--- |
-| **🔄 Modo Visual Dual** | Selector de modo de trabajo entre "Solo Reloj" y "GIF Playlist". | **Versatilidad.** Elige si prefieres una galería de arte animada o un reloj minimalista permanente. |
-| **⏰ Smart Timer On/Off** | Lógica con soporte para cruce de medianoche (Over-midnight). | **Automatización.** Configura el panel para que esté encendido en el horario establecido. |
-| **🕹️ Manual Override** | Sistema de prioridad de usuario con bloqueo de temporizador. | **Respeto al usuario.** Si apagas o enciendes a mano, el panel no te restaura el estado hasta el siguiente ciclo. |
-| **⚡ I2S Safety Shield** | Limitador dinámico de frecuencia I2S (16MHz/20MHz) según Buffer. | **Protección de HW.** Evita reinicios infinitos por falta de memoria al usar Double Buffer. |
+| **☁️ Actualización OTA** | Motor de actualización inalámbrica mediante `WiFiClientSecure` y GitHub. | **Mantenimiento Simple.** Actualiza el firmware a la última versión desde el menú sin usar cables. |
+| **🌐 Multidioma Dinámico** | Diccionarios `.json` externos con sistema de carga perezosa (**Lazy Loading**). | **Internacionalización.** Soporte para cualquier idioma sin sacrificar memoria RAM para los GIFs. |
+| **📐 Smart Menu Centering** | Cálculo dinámico de coordenadas basado en el ancho del texto para áreas de 128px. | **Estética Superior.** Menús perfectamente equilibrados y alineados independientemente del idioma. |
+| **😴 Feedback Universal** | Iconografía retro (Emoji 😴) diseñada píxel a píxel. | **Claridad Visual.** Indicadores de estado comprensibles universalmente sin depender de textos. |
 ---
-## 📜 Historial de Cambios Detallado (v2.0.0 -> v2.0.5)
+## 📜 Historial de Cambios Detallado (v2.0.5 -> v2.1.0)
 
 | Tipo | Componente | Descripción del Cambio |
 | :--- | :--- | :--- |
-| **✨ Nuevo** | **Visual** | Implementado selector de modo: "GIF Playlist" vs "Solo Reloj". |
-| **✨ Nuevo** | **Energía** | Temporizador On/Off con soporte para horario nocturno (ej. 23:00 a 07:00). |
-| **✨ Nuevo** | **Energía** | Función "Manual Override" (4s) para forzar sueño/despertar ignorando el Timer. |
-| **⚡ Mejora** | **UX / Botón** | Ajuste de intervalo de reloj reducido a rango **[2-10]** con saltos de **+2**. |
-| **⚡ Mejora** | **UX / Botón** | Lógica de **+5 min** (mantener) y **-5 min** (pulsación larga) en el ajuste del Timer. |
-| **⚡ Mejora** | **UX / Botón** | Despertar instantáneo del modo sueño con una sola pulsación rápida. |
-| **⚡ Mejora** | **Rendimiento** | Eliminado código bloqueante en Reloj y GIFs; respuesta al botón 100% instantánea. |
-| **⚡ Mejora** | **OSD** | Menús paginados (Página 1/2) para mejorar la legibilidad y organización. |
-| **🛡️ Fix** | **Estabilidad** | Limitación de I2S a 16MHz al detectar Double Buffer activo para prevenir crashes. |
-| **🛡️ Fix** | **Clima (API)** | **Sanitización de URL:** Corrección en el manejo de nombres de ciudades con espacios o guiones, evitando fallos en la petición HTTP. |
-| **🧹 Limpieza** | **SD** | Opción Reset en menú avanzado para borrar `PlaytList` seleccionada y `Temporizador`. |
-
+| **✨ Nuevo** | **Sistema** | **Soporte Multi-lenguaje:** Menús traducibles mediante archivos en la carpeta `/idioma/`. |
+| **✨ Nuevo** | **Sistema** | **OTA Update:** Implementada descarga segura de binarios directamente desde el menú OSD. |
+| **✨ Nuevo** | **UX / OSD** | **Auto-centrado:** Los textos se posicionan automáticamente en el centro del área total (`offset + 64`). |
+| **✨ Nuevo** | **Visual** | **Feedback Visual:** Añadida animación de emoji durmiendo para el modo sueño. |
+| **⚡ Mejora** | **Rendimiento** | **Gestión de RAM:** El diccionario JSON se libera al salir del menú para evitar bloqueos del sistema (*Panic*). |
+| **⚡ Mejora** | **Configuración** | El archivo `config.ini` se autogenera con comentarios en el idioma seleccionado por el usuario. |
 ---
 ### 🖥️ Estructura del Menú OSD (Navegación Inteligente)
 
@@ -93,6 +87,15 @@ El sistema se controla mediante un **único botón**. Utiliza una lógica de pul
 │   ├── 🖼️ Buffer: [SI / NO]
 │   ├── 👻 AntiGhot: [1, 2, 3, 4]
 │   ├── ⚠️ Reset:
+│   └── 🔙 Volver
+├── 🚀 Actualización
+│   └── 🔄 Buscar OTA
+│   └── 🔙 Volver
+├── 🌐 Idioma
+│   └── [ES] Español
+│   ├── [EN] English
+│   ├── [FR] Francais
+│   ├── ...
 │   └── 🔙 Volver
 ├── 💾 Guardar
 └── 🔙 Salir
@@ -151,6 +154,10 @@ Formatea tu MicroSD en **FAT32** añade los archivos Generador de Playlists v1.0
 ```text
 / (Raíz de la SD)
 ├── gifs/                        <-- Tus carpetas con GIFs (Arcade, Consolas, etc.)
+├── idioma/                      <-- Aquí estarán los archivos .json con los textos traducidos.
+│   ├── ES.json                  <-- Dicccionadio ES.json.
+│   ├── EN.json                  <-- Dicccionadio EN.json.
+│   └── FR.json                  <-- Dicccionadio FR.json.
 ├── playlists/                   <-- Aquí estarán las listas generadas por el script "Generador de Playlists".
 │   ├── Mis Favoritos.txt        <-- Lista .txt.
 │   ├── Metal Slug.txt           <-- Lista .txt.
@@ -220,6 +227,10 @@ WEATHER_INT=60
 # Texto que se muestra encima del reloj
 WEATHER_MSG=Game Room
 
+[LANGUAGE]
+# Indica el Idioma (Nombre del archivo sin .json: ES, EN, FR...)
+LANGUAGE=ES
+
 [END]
 ```
 ---
@@ -264,10 +275,55 @@ Si quieres estar 100% seguro de que **OpenWeatherMap** reconoce tu ciudad antes 
 
 * **Si el resultado es un texto con datos (JSON):** ¡El nombre es perfecto y el ESP32 lo leerá sin problemas!
 * **Si el resultado es un error (401 o 404):** Revisa que tu API Key esté activa (recuerda que tarda hasta 2 horas en activarse) o que el nombre de la ciudad no tenga errores tipográficos.
+
+### 6. ☁️ Actualización del Sistema (OTA)
+Ya no es necesario conectar el panel al PC para actualizarlo. Si hay una nueva versión disponible en el repositorio:
+
+1. Verifica que el WiFi esté configurado y activo en tu `config.ini`.
+2. Accede al menú OSD del panel.
+3. Navega hasta **Actualizacion > Buscar OTA**.
+4. El sistema descargará el nuevo firmware desde GitHub y se reiniciará solo.
+
+> [!WARNING]
+> No desconectes la alimentación del panel durante el proceso de actualización.
+
+### 7. 🌐 Guía del Sistema Multidioma (Archivos .json)
+
+La versión v2.1.0 utiliza un sistema de **Diccionarios Dinámicos**. A diferencia de otros sistemas, el diccionario NO reside en la memoria RAM constantemente; solo se carga cuando el usuario entra en el menú y se libera al salir. Esto garantiza que el motor de GIFs tenga toda la memoria disponible para las animaciones.
+
+#### 📂 Ubicación y Nomenclatura
+Los archivos deben estar en la carpeta `/idioma/` de la tarjeta SD. El nombre del archivo (sin la extensión) es el que aparecerá en el menú de selección.
+
+- `/idioma/ES.json` -> Aparecerá como "ES"
+- `/idioma/EN.json` -> Aparecerá como "EN"
+
+#### 🛠️ Estructura del Archivo JSON
+Si deseas crear una traducción nueva, puedes copiar el archivo `ES.json` y renombrarlo. Los campos están organizados por bloques:
+
+1. **`MENU`**: Etiquetas del menú principal.
+2. **`SUBMENU_XXX`**: Etiquetas específicas de cada sección.
+3. **`ESTADOS`**: Palabras cortas de estado (ON, OFF, SI, NO, VOLVER).
+4. **`CONFIG_INI`**: Comentarios que se escribirán en el archivo de configuración físico de la SD.
+
+#### ⚠️ Reglas Críticas para la Edición
+Para asegurar que el sistema no sufra bloqueos (*Kernel Panic*) o errores visuales, sigue estas reglas:
+
+* **🚫 Sin Acentos ni Ñ:** La fuente actual del sistema no soporta caracteres Unicode extendidos. Usa `n` en lugar de `ñ` y evita tildes (ej: `Actualizacion` en lugar de `Actualización`).
+* **📏 Límite de Caracteres:** Las etiquetas de los submenús no deben superar los **21 caracteres** para asegurar un centrado perfecto en el área de 128px sin salirse de los márgenes.
+* **🔡 Formato de Etiquetas:** En las secciones de submenú, incluye los dos puntos y el espacio si deseas que aparezcan (ej: `"modo": "Modo: "`).
+* **💾 Formato UTF-8:** Asegúrate de guardar el archivo en formato **UTF-8 (sin BOM)** para evitar caracteres extraños al inicio de la lectura.
+
+#### 🔄 Flujo de Carga
+Cuando cambias el idioma en el OSD:
+1. El sistema actualiza el valor `LANGUAGE` en el `config.ini`.
+2. Se reinicia el puntero del diccionario.
+3. La siguiente vez que abras el menú, el sistema buscará el archivo correspondiente a la nueva configuración.
+
 ---
 
 ## 🧠 Características Core LITE
 
+* **Smart Text Centering:** Motor dinámico que alinea automáticamente menús y estados en el centro de la matriz (`offset + 64px`) calculando el ancho de cada cadena de texto.
 * **WiFi Stealth Mode:** El ESP32 solo activa el WiFi brevemente para sincronizar la hora y el clima. El resto del tiempo el sistema permanece **100% offline**, garantizando **0 lag** en la reproducción de los GIFs.
 * **Barra de Notificaciones Dinámica:** Si activas el clima, el reloj baja automáticamente su posición (`startY=9`) para mostrar el mensaje personalizado (`WEATHER_MSG`), el icono del tiempo y la temperatura.
 * **Iconos en Bitmap:** Incluye iconos optimizados de 8x8 píxeles dibujados a mano para representar: Sol, Nubes, Lluvia, Nieve, Tormenta y Niebla.
@@ -334,14 +390,11 @@ Si utilizas DMDos Board V3 esta parte ya la tienes, salta al siguiente punto.
 ## 🛠️ Hoja de Ruta (Roadmap LITE)
 
 ### ⚡ Optimización & Funcionalidad
-* **[Próximamente] Sistema de Idiomas Dinámico:** Implementación de diccionarios externos (`es.txt`, `en.txt`, `fr.txt`) en la SD para cambiar todos los textos del OSD sin tocar el código.
 * **[Próximamente] Integración con Batocera / RetroPie:** Soporte para scripts `game-start` que enviarán el nombre del juego al panel para mostrar el GIF correspondiente automáticamente al jugar.
 * **[Investigación] Búsqueda Binaria:** Optimización de la función `buscarEnCache` para gestionar colecciones de miles de GIFs sin latencia.
 
 ### 🎨 Estética & Conectividad
-* **[Próximamente] OTA Self-Update:** Botón dedicado en el menú OSD para buscar, descargar e instalar actualizaciones automáticamente desde GitHub sin usar cables.
 * **[Próximamente] Soporte MQTT (Home Assistant):** Integración total para controlar el brillo, encendido/apagado y cambio de Playlists desde tu panel de domótica.
-* **[Diseño] Autocentrado Dinámico:** Lógica de renderizado para centrar automáticamente cualquier texto del diccionario en el panel basándose en el ancho de píxeles.
 ---
 
 ## ⚖️ Licencia y Agradecimientos
