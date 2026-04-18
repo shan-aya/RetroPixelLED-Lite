@@ -149,7 +149,7 @@ Puedes instalar esta versión sin instalar nada en tu PC usando nuestro instalad
 > * **Chip CH340/CH341:** [Descargar Drivers SparkFun](https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all)
 
 ### 2. 📂 Preparación de la Tarjeta SD
-Formatea tu MicroSD en **FAT32** añade los archivos Generador de Playlists v1.0.1.bat y config.ini quedando organiza la  Micro SD de la siguiente manera:
+Formatea tu MicroSD en **FAT32** añade los archivos Generador de Playlists v1.0.1.bat y config.ini en la raiz, dentro de la carpetra idioma los archivos .json y dentro de playlists las listas generadas con el script quedando organiza la Micro SD de la siguiente manera:
 
 ```text
 / (Raíz de la SD)
