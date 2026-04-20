@@ -1,5 +1,5 @@
 @echo off
-title Retro Pixel LED - Générateur de Playlists (STANDARD)
+title Retro Pixel LED - G‚n‚rateur de Playlists (STANDARD)
 color 0B
 setlocal enabledelayedexpansion
 
@@ -33,12 +33,12 @@ for /f "tokens=*" %%D in ('dir /b /ad "%TARGET_DIR%"') do (
 )
 
 echo.
-echo [2] Sélection des Dossiers
+echo [2] S‚lection des Dossiers
 echo --------------------------------------------------------
-echo Saisis les numéros séparés par des virgules (exemple : 1,3,5)
-echo Ou écris "TOUT" pour inclure tous les dossiers.
+echo Saisis les num‚ros s‚par‚s par des virgules (exemple : 1,3,5)
+echo Ou ‚cris "TOUT" pour inclure tous les dossiers.
 echo --------------------------------------------------------
-set /p selection="Sélection : "
+set /p selection="S‚lection : "
 
 echo.
 set /p playlistName="[3] Nom de la liste : "
@@ -55,12 +55,12 @@ if /i "%selection%"=="TOUT" (
     )
 )
 
-:: Boucle d’indexation
+:: Boucle d'indexation
 for %%s in (%selection%) do (
     set "currentFolder=!folder[%%s]!"
     echo  - Indexation : !currentFolder!
     
-    :: Entrons dans le dossier spécifique à l’intérieur de 'gifs'
+    :: Entrons dans le dossier sp‚cifique … l'int‚rieur de 'gifs'
     pushd "%ROOT_DIR%%TARGET_DIR%\!currentFolder!"
     
     :: Recherche des fichiers .gif dans ce dossier et ses sous-dossiers
@@ -80,8 +80,8 @@ for %%s in (%selection%) do (
 echo.
 color 0A
 echo ========================================================
-echo [SUCCÈS] Playlist '%playlistName%.txt' créée.
-echo !totalGifs! GIFs ont été indexés correctement.
+echo [SUCC?S] Playlist '%playlistName%.txt' cr‚‚e.
+echo !totalGifs! GIFs ont ‚t‚ index‚s correctement.
 echo ========================================================
 echo.
 pause
