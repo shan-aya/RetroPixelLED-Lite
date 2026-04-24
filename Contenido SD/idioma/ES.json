@@ -21,7 +21,7 @@
     "titulo_principal": "PLAYLISTS"
   },
   "SUBMENU_REPRODUCCION": {
-    "titulo_principal": "REPRODUCCION",
+    "titulo_principal": "REPRODUCCION ",
 	"modo": "Modo: ",
 	"aleatorio": "Aleatorio: ",
 	"arcade": "Arcade: "
