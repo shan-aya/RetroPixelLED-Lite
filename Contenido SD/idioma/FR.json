@@ -21,7 +21,7 @@
     "titulo_principal": "LISTES DE LECTURE"
   },
   "SUBMENU_REPRODUCCION": {
-    "titulo_principal": "AFFICHAGE",
+    "titulo_principal": "AFFICHAGE ",
     "modo": "Mode: ",
     "aleatorio": "Aleatoire: ",
     "arcade": "Arcade: "
