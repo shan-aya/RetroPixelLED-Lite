@@ -23,7 +23,8 @@
   "SUBMENU_REPRODUCCION": {
     "titulo_principal": "REPRODUCCION",
 	"modo": "Modo: ",
-	"aleatorio": "Aleatorio: "
+	"aleatorio": "Aleatorio: ",
+	"arcade": "Arcade: "
   },
   "SUBMENU_BRILLO": {
     "titulo_principal": "BRILLO",
@@ -94,6 +95,7 @@
     "double_buff": "Doble Buffer: 0=OFF, 1=ON (Elimina parpadeos)",
     "latch_blank": "Anti-Ghosting: 1 a 4 (Sube si ves brillo fantasma)",
     "play_mode": "Modo de visualizacion: 0=GIFs, 1=Solo Reloj",
+	"arcade": "Activa la reccepcion de marquesinas de Batocera: 0=OFF, 1=ON",
     "clock_enable": "Activa o desactiva el reloj: 0=OFF, 1=ON",
     "random_mode": "Modo de reproduccion: 0=Secuencial, 1=Aleatorio",
     "clock_int": "Intervalo: Cada cuantos GIFs aparece el reloj",
