@@ -163,6 +163,4 @@ Le mode Arcade dépend d’une IP stable.
 >    *“Comment assigner IP fixe [modèle du routeur]”*
 
 ---
- produire une version **EN.md** ou **ES.md**
 
-Tu veux que je génère aussi la version **FR.json** correspondante ?
