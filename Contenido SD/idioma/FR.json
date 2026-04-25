@@ -28,7 +28,7 @@
   },
   "SUBMENU_BRILLO": {
     "titulo_principal": "LUMINOSITE",
-    "click_ok": "Click:+5  Hold:OK"
+    "click_ok": "Click:+5  Long:OK"
   },
   "SUBMENU_WIFI": {
     "titulo_principal": "WIFI"
@@ -51,7 +51,7 @@
     "Speed": "I2sSeep: ",
     "buffer": "Buffer: ",
     "antighos": "AntiGhos: ",
-    "reset": "Reset"
+    "reset": "Remise a zero"
   },
   "SUBMENU_ACTUALIZACION": {
     "titulo_principal": "MISE A JOUR",
