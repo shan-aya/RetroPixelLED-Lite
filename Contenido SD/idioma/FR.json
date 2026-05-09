@@ -1,7 +1,7 @@
 {
   "_INFO_": {
     "ADVERTENCIA": "PAS D'ACCENTS (Le systeme ne les supporte pas)",
-    "LIMITE": "Max 21 caracteres",
+    "LIMITE": "Max 21 caracteres"
   },
   "MENU": {
     "titulo": "MENU PRINCIPAL ",
@@ -92,7 +92,7 @@
   },
   "OTA": {
     "reset": "Redemarrage pour",
-    "buscar": "Recherche de MAJ",
+    "buscar": "Recherche de MAJ"
   },
   "FTP": {
 	"reset": "Reiniciando para",
