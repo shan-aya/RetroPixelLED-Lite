@@ -67,7 +67,8 @@
 	"btn_bajar": "Bajar: "
   },
   "SUBMENU_ACTUALIZACION": {
-    "titulo": "ACTUALIZACION"
+    "titulo": "ACTUALIZACION",
+	"buscar_ota": "Buscar Update"
   },
   "SUBMENU_FTP": {
     "titulo": "ARCHIVOS SD",
