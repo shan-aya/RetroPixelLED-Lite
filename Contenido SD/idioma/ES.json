@@ -37,7 +37,9 @@
     "titulo": "RELOJ ",
 	"cada": "Cada: ",
     "ver": "Ver: ",
-    "estilo": "Estilo: "
+    "estilo": "Estilo: ",
+	"transicion": "Transicion: ",
+	"color": "Color: "
   },
   "SUBMENU_CLIMA": {
     "titulo": "CLIMA"
@@ -97,5 +99,16 @@
   "FTP": {
 	"reset": "Reiniciando para",
 	"iniciar": "Iniciar FTP"
+  },
+  "COLORES": {
+    "blanco": "Blanco",
+	"rojo": "Rojo",
+	"verde": "Verde",
+	"azul": "Azul",
+	"amarillo": "Amarillo",
+	"cian": "Cian",
+	"magenta": "Magenta",
+	"naranja": "Naranja",
+	"rosa": "Rosa"
   }
 }
