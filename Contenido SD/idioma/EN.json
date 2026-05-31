@@ -37,7 +37,9 @@
     "titulo": "CLOCK ",
     "cada": "Every: ",
     "ver": "Show: ",
-    "estilo": "Style: "
+    "estilo": "Style: ",
+	"transicion": "Transition: ",
+	"color": "Color: "
   },
   "SUBMENU_CLIMA": {
     "titulo": "WEATHER"
@@ -97,5 +99,16 @@
   "FTP": {
 	"reset": "Rebooting for",
 	"iniciar": "Start FTP"
+  },
+  "COLORES": {
+    "blanco": "White",
+    "rojo": "Red",
+    "verde": "Green",
+    "azul": "Blue",
+    "amarillo": "Yellow",
+    "cian": "Cyan",
+    "magenta": "Magenta",
+    "naranja": "Orange",
+    "rosa": "Pink"
   }
 }
