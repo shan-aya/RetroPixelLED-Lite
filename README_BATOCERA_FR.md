@@ -1,166 +1,79 @@
-# 🕹️ Intégration avec Batocera (Mode Arcade Lite)
 
-Le **Mode Arcade** de la version Lite permet à ta matrice LED de fonctionner comme une marquise dynamique. Le panneau détecte automatiquement le jeu lancé dans **Batocera** et affiche son logo au format **BMP 24 bits**.
+## 4. Installation automatique dans Batocera
 
----
+Depuis la version **v3.0.0**, plus besoin d’éditer manuellement du code, gérer les formats Windows ou utiliser des consoles SSH compliquées comme PuTTY.
 
-## 🎯 Exploitation des Ressources (Scraping)
-
-Le système **réutilise les images déjà scrapées dans Batocera** (marquees / wheel art).  
-Le script PowerShell se charge de :
-
-- les rechercher  
-- les redimensionner  
-- les convertir automatiquement  
+Un **script installateur intelligent PowerShell** fait tout automatiquement depuis votre PC.
 
 ---
 
-# 1. Philosophie d’Affichage (Hiérarchie)
+### 📦 Fonctionnalités de cet installateur
 
-Pour éviter que le panneau reste vide, le système applique une logique de cascade :
-
-1. **Marquee du Jeu** — ex : `mslug.bmp`  
-2. **Logo du Système** — ex : `/arcade/neogeo/logo.bmp`  
-3. **Image Par Défaut** — `/arcade/default.bmp`  
-
----
-
-# 2. Préparation des Assets (Script PowerShell)
-
-Le système utilise une **Recherche Binaire** pour retrouver instantanément les fichiers parmi des milliers de jeux.  
-Les fichiers doivent donc être correctement indexés.
-
-## 2.1 🛠️ Utilisation du Script Marquesinas
-
-Le script se trouve dans :  
-`Batocera/tools/`
-
-Il contient :
-
-- `Ejecutar Script Marquesinas.bat`  
-- `Script.ps1`
-
-### Étapes :
-
-1. Connecte la **carte SD** au PC.  
-2. Lance `Ejecutar Script Marquesinas.bat`.  
-3. Configure les chemins :  
-   - **Origine ROMs :** `\\192.168.1.119\share\roms`  
-   - **Destination :** `C:\Export_Arcade` ou `F:\` (SD)  
-4. Choisis les systèmes à traiter (un, plusieurs ou **Tous (0)**).  
-5. Si tu as utilisé `C:\Export_Arcade`, copie ensuite le dossier `arcade` vers la SD.
-
-### Le script effectue automatiquement :
-
-- **Redimensionnement** → 128×32 px  
-- **Conversion** → BMP 24 bits  
-- **Indexation** → fichiers `.txt` triés (ex : `neogeo.txt`)
-
-> [!CAUTION]  
-> **Accès Samba**  
-> Identifiants par défaut Batocera :  
-> - Utilisateur : `root`  
-> - Mot de passe : `linux`
+* Injecte automatiquement l’adresse IP de votre panneau dans tous les scripts de communication.
+* Convertit les fichiers au format Unix (LF) pour éviter les erreurs avec le Bloc-notes Windows.
+* Crée les dossiers `game-start` et `game-end` dans Batocera et copie les fichiers nécessaires.
+* Génère un script système (`custom.sh`) qui donne les permissions d’exécution (`chmod +x`) automatiquement à chaque démarrage.
 
 ---
 
-# 3. Structure Obligatoire sur la SD
+### 🛠️ Pré-requis
 
-```
-📂 arcade/
-├── 📄 default.bmp
-├── 📄 neogeo.txt
-├── 📄 mame.txt
-├── 📂 neogeo/
-│   ├── 📄 logo.bmp
-│   ├── 📄 mslug.bmp
-│   └── 📄 kof98.bmp
-└── 📂 mame/
-    ├── 📄 logo.bmp
-    └── 📄 pacman.bmp
-```
+1. Avoir votre PC et Batocera connectés sur le même réseau (ou connecter physiquement le stockage Batocera au PC).
+2. Connaître l’adresse IP locale de votre panneau Retro Pixel LED (ex : `192.168.1.109`).
+3. Télécharger le dossier complet `Auto Instalador Batocera` dans ce repo, disponible [ici](https://github.com/fjgordillo86/RetroPixelLED-Lite/tree/main/Batocera/Instalador%20Autom%C3%A1tico).
 
-### À créer manuellement :
-
-1. **logo.bmp** dans chaque dossier système  
-2. **default.bmp** dans `/arcade/`
+> [!IMPORTANT]
+> Si vous avez téléchargé le zip du repo, **décompressez-le complètement** avant d’exécuter l’installateur.
 
 ---
 
-# 4. Configuration dans Batocera
+### 💻 Étapes
 
-## A. Définir l’IP du Panneau
+1. Ouvrez le dossier `Instalador Automático` sur votre PC. Il contient ces fichiers :
+   * `Ejecutar Script Instalador Batocera.bat`
+   * `Script_Instalador_Batocera.ps1`
+   * `pixel_start.sh`
+   * `pixel_stop.sh`
 
-1. Ouvre `pixel_start.sh`, `pixel_stop.sh`, `pixel_off.sh` avec :  
-   - Notepad++  
-   - VS Code  
-   - Sublime Text  
-2. Remplace l’IP par celle de ton ESP32.  
-3. Vérifie le format **Unix (LF)**.  
-4. Sauvegarde.
+3. Double-cliquez sur `Ejecutar Script Instalador Batocera.bat`.
 
-> [!CAUTION]  
-> Ne jamais utiliser le Bloc‑notes Windows (CRLF).
+4. Suivez les instructions dans la console :
+   * **Étape 1 :** Entrez l’IP de votre panneau puis appuyez sur `Enter`.
+   * **Étape 2 :** Entrez le chemin vers Batocera, soit en réseau (ex : `\\192.168.1.119` ou `\\BATOCERA`), soit la lettre de la partition si stockage connecté (ex : `E:`).
 
----
+5. Le script traite les fichiers rapidement. À la fin, vous verrez `🎉 ¡INSTALACIÓN COMPLETADA!`. Appuyez sur une touche pour fermer.
 
-## B. Emplacement des Scripts
+<img width="1110" height="373" alt="image" src="https://github.com/user-attachments/assets/cf5f3ac3-5906-4071-ac0a-45c11341c896" />
 
-Copie vers :
+7. **Redémarrez complètement Batocera.**
 
-`\\IP_DE_TON_BATOCERA\share\system\configs\emulationstation\scripts`
+> [!CAUTION]
+> Le redémarrage complet est **obligatoire** pour que `custom.sh` configure les permissions internes. Après cela, à chaque lancement ou sortie de jeu, le panneau réagit automatiquement.
 
-Organisation :
+## 5. Fonctionnement en temps réel
 
-- `/game-start/pixel_start.sh`  
-- `/game-end/pixel_stop.sh`
+* **Au lancement d’un jeu :** Batocera envoie le système et le nom ROM. Le panneau affiche la marquise correspondante via l’index.
+* **À la sortie du jeu :** Batocera envoie la commande `STOP`. Le panneau interrompt le mode Arcade et revient automatiquement aux **GIFs** ou à l’**Horloge**.
+* **Gestion des erreurs :** Grâce à la cascade, si le jeu est nouveau et non encore accompagné d’une BMP, le panneau affiche le logo système, évitant un écran vide.
 
----
+> [!CAUTION]
+> Chaque fois que vous ajoutez ou scrapez de nouveaux jeux dans Batocera, **réexécutez le script PowerShell** sur votre PC pour mettre à jour la SD. Sinon, l’ESP32 ne saura pas que ces fichiers existent.
 
-## C. Permissions d’Exécution (SSH)
+## 6. Configuration critique : IP fixe pour ESP32
 
-1. Connecte-toi via **PuTTY**  
-2. Identifiants :  
-   - root  
-   - linux  
-3. Donne les permissions :
+Pour que le mode **🕹️ Arcade** fonctionne toujours correctement, l’ESP32 doit avoir une IP fixe.
 
-```bash
-chmod +x /userdata/system/configs/emulationstation/scripts/game-start/pixel_start.sh 
-chmod +x /userdata/system/configs/emulationstation/scripts/game-end/pixel_stop.sh
-```
+> [!TIP]
+> **Attribuer une IP fixe :**  
+> Les scripts envoient les commandes à une IP définie dans vos scripts. Si le routeur change l’IP de l’ESP32, le panneau ne recevra plus les ordres.  
+> Comment faire ?  
+> 1. Accédez à votre routeur.  
+> 2. Trouvez la section DHCP statique ou réservation par MAC.  
+> 3. Associez la MAC de l’ESP32 à l’IP choisie (ex : `192.168.1.109`).  
+> 4. Si besoin, cherchez un guide adapté à votre routeur sur votre moteur de recherche préféré.
 
-4. Vérifie :
-
-```bash
-ls -l /userdata/system/configs/emulationstation/scripts/game-start/pixel_start.sh
-ls -l /userdata/system/configs/emulationstation/scripts/game-end/pixel_stop.sh
-```
+## 7. Profitez des marquises pendant vos parties arcade !
 
 ---
 
-# 5. Fonctionnement en Temps Réel
-
-- **Lancement d’un jeu :** Batocera envoie le système + nom de ROM → le panneau affiche la marquee.  
-- **Sortie du jeu :** Batocera envoie `STOP` → retour aux GIFs ou à l’Horloge.  
-- **Erreurs :** si un BMP manque → logo du système.
-
-> [!CAUTION]  
-> Après ajout de jeux ou nouveau scraping → **relancer le script PowerShell**.
-
----
-
-# 6. IP Fixe pour l’ESP32 (Critique)
-
-Le mode Arcade dépend d’une IP stable.
-
-> [!TIP]  
-> **Configurer une IP fixe dans le routeur :**  
-> 1. Ouvre l’interface du routeur  
-> 2. Cherche **DHCP statique**  
-> 3. Associe la MAC de l’ESP32 à l’IP utilisée dans les scripts  
-> 4. Si besoin :  
->    *“Comment assigner IP fixe [modèle du routeur]”*
-
----
-
+N’hésitez pas à me demander si vous souhaitez des précisions, traductions complémentaires ou aides à la configuration. Je suis là pour vous accompagner ! ➡️
