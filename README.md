@@ -1,4 +1,4 @@
-# ✨ Retro Pixel LED Lite v3.0.4
+# ✨ Retro Pixel LED Lite v3.0.5
 **[🇪🇸 Español](https://github.com/fjgordillo86/RetroPixelLED-Lite/blob/main/README.md) | [🇫🇷 Français](https://github.com/fjgordillo86/RetroPixelLED-Lite/blob/main/README_FR.md)**
 
 ### **[✈️ Unirse al Grupo de Telegram: Retro Pixel LED para estár al día de las actualizaciones](https://t.me/RetroPixelLed)**
@@ -16,15 +16,17 @@ Se integra soporte nativo para mandos a distancia, permitiendo navegar por el Me
 
 Si quieres probar la versión estandar aquí tienes el enlace al **[GitHub.](https://github.com/fjgordillo86/RetroPixelLED)**
 
-¿Quieres hacer tus propios GIFs?  Aquí tienes dos herramientas magínificas.
+¿Quieres hacer tus propios GIFs?  Aquí tienes tres herramientas magínificas.
 - [DMD GIF converter](https://github.com/shan-aya/DMD_GIF_converter) creada por **shan-aya**.
+- [dmd gif converter](https://github.com/red77290/dmd_gif_converter) creada por **red77290**.
 - [Video a GIF](https://p4blogc.github.io/dmdos-converter/) creada por **p4bloGC**.
 
-## 🆕 Novedades de la Versión v3.0.4 Lite
 
-* **💥 Transición "Explosión de Partículas":** El reloj ahora cobra vida al aparecer y desaparecer. Se ha implementado un efecto dinámico de partículas que sustituye las transiciones estáticas, dando una sensación mucho más fluida y profesional a la pantalla.
-* **🎨 Selección de Color vía OSD:** Olvídate de editar archivos `.ini` para cambiar el color del reloj. Ahora puedes acceder al menú OSD y seleccionar tu combinación favorita directamente desde el control remoto.
-* **⚡ Eliminación de Parpadeos (Single Buffer):** Se ha refactorizado la lógica de dibujado para el reloj y el menú. Al utilizar un modo de *Single Buffer* optimizado, hemos eliminado los molestos parpadeos que ocurrían al renderizar interfaces rápidas, garantizando una imagen limpia y estable.
+## 🆕 Novedades de la Versión v3.0.5 Lite
+
+#### 🛡️ Corrección de Errores (Fixes)
+* **Estabilidad del Efecto Rainbow:** Corregido el renderizado del efecto dinámico *Rainbow* (Arcoíris), el cual se veía afectado negativamente por la optimización anti-parpadeo del reloj cuando el *Double Buffer* estaba desactivado.
+* **Refresco de Brillo en OSD:** Corregido el fallo visual en el menú OSD; ahora el porcentaje de brillo se actualiza dinámicamente en la pantalla en tiempo real mientras se ajusta con el mando IR.
 
 
 ## 🕹️ Integración Especial: Modo Arcade (Batocera)
@@ -39,10 +41,13 @@ Esta versión Lite introduce un soporte avanzado para sistemas de retrogaming. M
 
 ---
 
-## 📜 Historial de Cambios Detallado (v3.0.0 -> v3.0.1)
+## 📜 Historial de Cambios Detallado (v3.0.0 -> v3.0.5)
 
 | Característica | Detalle Técnico | Beneficio |
 | :--- | :--- | :--- |
+| **💥 Transición de Partículas** | Motor de partículas dinámicas integrado para los efectos de entrada y salida de la hora. | **Fluidez visual.** Elimina los cortes estáticos por un efecto fluido y profesional. |
+| **🎨 Selección de Color OSD** | Menú interactivo en pantalla mapeado con el receptor IR y la memoria EEPROM/SD. | **Personalización.** Cambia el color del reloj al vuelo desde el mando sin editar el `config.ini`. |
+| **⚡ Reloj Sin Parpadeos** | Refactorización de la lógica de renderizado usando un modo *Single Buffer* optimizado para interfaces. | **Imagen limpia.** Eliminación total del *flicker* (parpadeo) al actualizar datos rápidos. |
 | **🧠 Optimización de RAM** | Refactorización de objetos `String` a `char[]` y uso masivo de `PSTR()` / `F()`. | **Cero fragmentación.** Los textos se almacenan en la Flash, liberando el Heap para el Double Buffer. |
 | **🛡️ Anti-Panic System** | Verificación de `display->begin()` con cambio a single Buffer en caso de fallo de asignación de RAM. | **Estabilidad total.** Evita cuelgues (`StoreProhibited`) si la memoria se fragmenta tras usar el WiFi. |
 | **🖱️ Confirmación Segura** | Lógica de detección basada en tiempo de pulsación (*Long Press*) para el botón físico. | **Navegación Precisa.** Evita entradas accidentales en menús; ahora confirmas manteniendo presionado. |
