@@ -1,5 +1,13 @@
 ## 📝 Changelog (Registro de Cambios)
 
+### [v3.0.5] - 2026-06-18
+
+#### 🛡️ Fixes
+* **Estabilidad del Efecto Rainbow:** Corregido el renderizado del efecto dinámico *Rainbow* (Arcoíris), el cual se veía afectado negativamente por la optimización anti-parpadeo del reloj cuando el *Double Buffer* estaba desactivado.
+* **Refresco de Brillo en OSD:** Corregido el fallo visual en el menú OSD; ahora el porcentaje de brillo se actualiza dinámicamente en la pantalla en tiempo real mientras se ajusta con el mando o el botón.
+
+---  
+
 ### [v3.0.4] - 2026-05-31
 **Retro Pixel LED Lite: "Particles & System Stability"**
 
