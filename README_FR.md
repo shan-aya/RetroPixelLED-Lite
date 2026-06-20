@@ -1,4 +1,4 @@
-# ✨ Retro Pixel LED Lite v3.0.4
+# ✨ Retro Pixel LED Lite v3.0.5
 **[🇪🇸 Español](https://github.com/fjgordillo86/RetroPixelLED-Lite/blob/main/README.md) | [🇫🇷 Français](https://github.com/fjgordillo86/RetroPixelLED-Lite/blob/main/README_FR.md)**
 
 ### **[✈️ Rejoindre le Groupe Telegram : Retro Pixel LED pour rester informé des mises à jour](https://t.me/RetroPixelLed)**
@@ -17,17 +17,18 @@ Un support natif pour les télécommandes est intégré, permettant de naviguer 
 
 Si vous voulez essayer la version standard, voici le lien vers le **[GitHub.](https://github.com/fjgordillo86/RetroPixelLED)**
 
-Voulez-vous créer vos propres GIFs ? Voici deux outils magnifiques.
+Voulez-vous créer vos propres GIFs ? Voici trois outils magnifiques.
 
 - [DMD GIF converter](https://github.com/shan-aya/DMD_GIF_converter) créé par **shan-aya**.
-
+- [dmd gif converter](https://github.com/red77290/dmd_gif_converter) créé par **red77290**.
+- [Video a GIF](https://p4blogc.github.io/dmdos-converter/) créé par **p4bloGC**.
 ---
 
-## 🆕 Nouveautés de la Version v3.0.4 Lite
-* **💥 Transition "Explosion de Particules" :** L’horloge prend vie à son apparition et disparition. Nous avons implémenté un effet dynamique de particules qui remplace les transitions statiques, offrant une sensation beaucoup plus fluide et professionnelle à l’écran.  
-* **🎨 Sélection de Couleur via OSD :** Oubliez l’édition des fichiers `.ini` pour changer la couleur de l’horloge. Vous pouvez désormais accéder au menu OSD et sélectionner votre combinaison favorite directement depuis la télécommande.  
-* **⚡ Élimination des Scintillements (Single Buffer) :** J’ai refactorisé la logique de dessin pour l’horloge et le menu. En utilisant un mode *Single Buffer* optimisé, nous avons supprimé les scintillements gênants qui survenaient lors du rendu d’interfaces rapides, garantissant une image nette et stable.
+## 🆕 Nouveautés de la Version v3.0.5 Lite
 
+#### 🛡️ Correction des erreurs (Corrections)
+* **Stabilité de l'effet Arc-en-ciel :** Correction du rendu de l'effet dynamique *Arc-en-ciel*, qui était affecté négativement par l'optimisation anti-scintillement de l'horloge lorsque le *Double Buffer* était désactivé.  
+* **Mise à jour de la luminosité sur l'OSD :** Correction du défaut visuel dans le menu OSD ; le pourcentage de luminosité se met désormais à jour dynamiquement à l'écran en temps réel lors du réglage avec la télécommande IR.
 ---
 
 ## 🕹️ Intégration Spéciale : Mode Arcade (Batocera)
@@ -44,10 +45,13 @@ Cette version Lite introduit une prise en charge avancée pour les systèmes de 
 
 ---
 
-## 📜 Historique détaillé des changements (v3.0.0 -> v3.0.1)
+## 📜 Historique détaillé des changements (v3.0.1 -> v3.0.5)
 
 | Caractéristique | Détail Technique | Bénéfice |                                                                                |
 | :--------------- | :---------- | :-------------------------------------------------------------------------------------------------------- |
+| **💥 Transition de Particules** | Moteur de particules dynamique intégré pour les effets d’entrée et de sortie de l’heure. | **Fluidité visuelle.** Élimine les coupures statiques pour un effet fluide et professionnel. |
+| **🎨 Sélection de Couleur OSD** | Menu interactif à l’écran mappé avec le récepteur IR et la mémoire EEPROM/SD. | **Personnalisation.** Change la couleur de l’horloge à la volée depuis la télécommande sans modifier le `config.ini`. |
+| **⚡ Horloge Sans Scintillement** | Refactorisation de la logique de rendu utilisant un mode *Single Buffer* optimisé pour les interfaces. | **Image nette.** Élimination totale du *flicker* (scintillement) lors de la mise à jour rapide des données. |
 | **🧠 Optimisation de la RAM**                        | Refactorisation des objets `String` en `char[]` et utilisation massive de `PSTR()` / `F()`.             | **Aucune fragmentation.** Les textes sont stockés en Flash, libérant le Heap pour le Double Buffer.                            |
 | **🛡️ Système Anti-Panique**                          | Vérification de `display->begin()` avec basculement vers Single Buffer en cas d’échec d’allocation RAM. | **Stabilité totale.** Evite les plantages (`StoreProhibited`) si la mémoire est fragmentée après l’utilisation du WiFi.         |
 | **🖱️ Confirmation Sécurisée**                        | Logique de détection basée sur la durée d’appui (*Long Press*) du bouton physique.                      | **Navigation précise.** Evite les entrées accidentelles dans les menus ; confirmation par appui prolongé.                      |
