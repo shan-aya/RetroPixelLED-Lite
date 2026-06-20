@@ -1,4 +1,4 @@
-# ✨ Retro Pixel LED Lite v3.0.5
+# ✨ Retro Pixel LED Lite v3.0.8
 **[🇪🇸 Español](https://github.com/fjgordillo86/RetroPixelLED-Lite/blob/main/README.md) | [🇫🇷 Français](https://github.com/fjgordillo86/RetroPixelLED-Lite/blob/main/README_FR.md)**
 
 ### **[✈️ Unirse al Grupo de Telegram: Retro Pixel LED para estár al día de las actualizaciones](https://t.me/RetroPixelLed)**
@@ -22,19 +22,31 @@ Si quieres probar la versión estandar aquí tienes el enlace al **[GitHub.](htt
 - [Video a GIF](https://p4blogc.github.io/dmdos-converter/) creada por **p4bloGC**.
 
 
-## 🆕 Novedades de la Versión v3.0.5 Lite
+## 🆕 Novedades de la Versión v3.0.8 Lite
+
+#### 🚀 Nuevas Características (Features)
+* **Soporte Nativo para RePlayOS (Modo Arcade por Red):** Integración directa con el sistema operativo RePlayOS mediante consultas HTTP asíncronas y no bloqueantes a su API REST. El firmware monitoriza el estado del frontend en segundo plano, detecta cuándo se inicia un juego (`view_id: 2`) de forma automática y conmuta la pantalla sin intervención de scripts externos.
+* **Gestión de Fallback Inteligente de GIFs:** Optimización del ciclo de renderizado en el Modo Arcade. Si un juego o sistema monitorizado carece de arte estático en la tarjeta SD, el control se devuelve inmediatamente al motor de animaciones para seguir reproduciendo GIFs.
 
 #### 🛡️ Corrección de Errores (Fixes)
 * **Estabilidad del Efecto Rainbow:** Corregido el renderizado del efecto dinámico *Rainbow* (Arcoíris), el cual se veía afectado negativamente por la optimización anti-parpadeo del reloj cuando el *Double Buffer* estaba desactivado.
 * **Refresco de Brillo en OSD:** Corregido el fallo visual en el menú OSD; ahora el porcentaje de brillo se actualiza dinámicamente en la pantalla en tiempo real mientras se ajusta con el mando IR.
 
 
-## 🕹️ Integración Especial: Modo Arcade (Batocera)
+## 🕹️ Integración Especial: Modo Arcade (Batocera & RePlayOS)
 
-Esta versión Lite introduce un soporte avanzado para sistemas de retrogaming. Mediante una jerarquía de archivos inteligente, el panel puede mostrar:
-1. **Marquesina del Juego:** Scrapeada directamente desde tu colección de Batocera.
-2. **Logo del Sistema:** Imagen de respaldo si el juego no dispone de arte específico.
-3. **Reserva Maestro:** Imagen por defecto si el sistema no está indexado.
+Esta versión Lite introduce un soporte avanzado para ecosistemas de retrogaming, permitiendo dos vías de sincronización: mediante scripts locales (**Batocera**) o mediante monitorización nativa por red local (**RePlayOS**). 
+
+A través de una jerarquía de archivos inteligente y optimizada para el hardware del ESP32, el panel gestiona el cambio de estado y muestra:
+
+1. **Marquesina del Juego:** Imagen `.bmp` de 24 bits cargada instantáneamente gracias al sistema de búsqueda en los índices de la SD.
+2. **Logo del Sistema:** Imagen de respaldo en la raíz del directorio `/arcade/` si el juego en ejecución no dispone de un arte específico.
+3. **Reserva Maestro:** Si el sistema no está indexado o faltan tanto el logo como el juego, el panel deriva el flujo de manera fluida al motor de GIFs para seguir reproduciendo GIFs, evitando parpadeos en la matriz de LEDs.
+
+### 🔌 Métodos de Conexión
+
+* **Por Scripts (Batocera):** Envío de comandos directos al panel mediante scripts `game-start` y `game-end` que conmutan el estado inmediatamente al lanzar un juego.
+* **Por Red (RePlayOS API):** Configurando la IP y el Token de control en el firmware, el ESP32 interroga de forma limpia y no bloqueante al puerto `55356` del sistema cada 3 segundos, integrándose de forma invisible con la sesión activa del jugador.
 
 > [!IMPORTANT]
 > Se incluye una herramienta en `/Batocera/tools` para automatizar el redimensionado a 128x32, la conversión a BMP de 24 bits y la generación de índices para una respuesta instantánea del ESP32. Consulta el [README específico de Batocera](/README_BATOCERA.md) para más detalles.
@@ -285,6 +297,12 @@ BTN_MENU=EA15FF00
 BTN_OK=ED12FF00
 BTN_SUBIR=E41BFF00
 BTN_BAJAR=B34CFF00
+
+[REPLAY_OS]
+# IP que tiene asignada ReplayOS
+IP=192.168.1.105
+# Token ReplayOS: SYSTEM > INFORMATION > NET CONTROL CODE
+TOKEN=xxxxxx
 
 [END]
 ```
